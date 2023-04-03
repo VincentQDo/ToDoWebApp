@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useRouter } from 'next/router';
 import { getTasks, saveTasks } from "../shared/taskService";
 import { signOut } from "../shared/authService";
 
-const TaskList = () => {
+const TaskList = ({ email }: {email: string}) => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
-  const history = useHistory();
+  const history = useRouter();
 
   useEffect(() => {
     const storedTasks = getTasks();
@@ -15,12 +15,12 @@ const TaskList = () => {
 
   const addTask = () => {
     const updatedTasks = [...tasks, newTask];
-    setTasks(updatedTasks);
+    setTasks(updatedTasks as any);
     saveTasks(updatedTasks);
     setNewTask("");
   };
 
-  const deleteTask = (index) => {
+  const deleteTask = (index: any) => {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
     saveTasks(updatedTasks);

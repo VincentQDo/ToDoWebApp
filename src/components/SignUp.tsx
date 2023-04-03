@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { signUp } from '../shared/authService';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const history = useRouter();
 
   const handleSignUp = async () => {
     await signUp(email, password);
-    history.push('/tasks');
+    history.push('/tasklist');
   };
 
   return (

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { signIn } from '../shared/authService';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const history = useRouter();
 
   const handleSignIn = async () => {
     const isAuthenticated = await signIn(email, password);
     if (isAuthenticated) {
-      history.push('/tasks');
+      history.push('/tasklist');
     } else {
       alert('Invalid email or password');
     }
